@@ -19,7 +19,7 @@
             <p class="register-subtitle">Join the Code Snippet Sharing Platform</p>
         </div>
 
-        <form class="register-form" action="reg" method="post">
+        <form class="register-form" action="${pageContext.request.contextPath}/auth/register" method="post">
             <div class="form-row">
                 <div class="form-group">
                     <label for="username" class="form-label">Username</label>

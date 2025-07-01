@@ -34,35 +34,6 @@
         </div>
     </header>
 
-    <form action="reg" method="post">
-        <div class="form-group">
-            <label for="username" class="form-label">Username</label>
-            <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    class="form-input"
-                    placeholder="Choose a username"
-                    required
-            />
-        </div>
-
-        <div class="form-group">
-            <label for="password" class="form-label">Password</label>
-            <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    class="form-input"
-                    placeholder="Create a password"
-                    required
-            />
-        </div>
-        <button type="submit" class="btn btn-primary register-button">Create Account</button>
-
-
-    </form>
-
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
