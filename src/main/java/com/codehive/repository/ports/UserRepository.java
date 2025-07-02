@@ -4,7 +4,6 @@ import com.codehive.db.DBConnection;
 import com.codehive.domain.entity.User;
 
 import java.sql.*;
-import java.util.Optional;
 
 public class UserRepository implements UserRepoInterface {
     private final Connection db;
@@ -42,7 +41,28 @@ public class UserRepository implements UserRepoInterface {
     }
 
     @Override
-    public Optional<User> getById(Integer id) {
-        return Optional.empty();
+    public User getById(Integer id) {
+        return null;
+    }
+
+    @Override
+    public User getByEmail(String email) throws SQLException {
+        String sql = "SELECT * FROM users WHERE email = ?";
+        PreparedStatement preparedStatement = db.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setString(1, email);
+
+        ResultSet rows = preparedStatement.executeQuery();
+        if (rows.next()) {
+            User user = new User();
+            user.setId(rows.getInt("id"));
+            user.setEmail(rows.getString("email"));
+            user.setUsername(rows.getString("username"));
+            user.setPassword(rows.getString("password"));
+            user.setCreatedAt(rows.getTimestamp("created_at").toLocalDateTime());
+            user.setUpdatedAt(rows.getTimestamp("updated_at").toLocalDateTime());
+            return user;
+        }
+
+        return null;
     }
 }

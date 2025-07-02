@@ -30,4 +30,30 @@ public class ShaHashing implements HashingService {
             return null;
         }
     }
+
+    @Override
+    public boolean verify(String input, String storedHash) {
+        try {
+            // Extract salt (first 16 bytes) from storedHash
+            byte[] storedBytes = Base64.getDecoder().decode(storedHash);
+            byte[] salt = new byte[16];
+            System.arraycopy(storedBytes, 0, salt, 0, 16);
+
+            // Hash input with the same salt
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update(salt);
+            byte[] hashedInput = md.digest(input.getBytes(StandardCharsets.UTF_8));
+
+            // Combine salt and new hash for comparison
+            byte[] expected = new byte[16 + hashedInput.length];
+            System.arraycopy(salt, 0, expected, 0, 16);
+            System.arraycopy(hashedInput, 0, expected, 16, hashedInput.length);
+
+            // Compare with stored hash
+            return MessageDigest.isEqual(expected, storedBytes);
+        } catch (NoSuchAlgorithmException e) {
+            System.err.println("No such algorithm: " + e.getMessage());
+            return false;
+        }
+    }
 }
