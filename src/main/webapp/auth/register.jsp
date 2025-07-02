@@ -15,7 +15,7 @@
 <div class="register-container">
     <div class="register-card">
         <div class="register-header">
-            <h1 class="register-title">Create Accountsses</h1>
+            <h1 class="register-title">Create Account</h1>
             <p class="register-subtitle">Join the Code Snippet Sharing Platform</p>
         </div>
 
@@ -27,6 +27,7 @@
                             type="text"
                             id="username"
                             name="username"
+                            value="<%= request.getAttribute("username") != null ? request.getAttribute("username") : "" %>"
                             class="form-input"
                             placeholder="Choose a username"
                             required
@@ -37,6 +38,7 @@
                     <label for="email" class="form-label">Email</label>
                     <input
                             type="email"
+                            value="<%= request.getAttribute("email") != null ? request.getAttribute("email") : ""  %>"
                             id="email"
                             name="email"
                             class="form-input"
@@ -68,6 +70,10 @@
                     <%--                            required--%>
                     />
                 </div>
+                    <% String error = request.getParameter("error"); if (error != null) { %>
+                <p style="color:red;"><%= error %>
+                </p>
+                    <% } %>
 
                 <button type="submit" class="btn btn-primary register-button">Create Account</button>
 
