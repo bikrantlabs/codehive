@@ -3,8 +3,10 @@ package com.codehive.cotrollers;
 
 import com.codehive.domain.entity.User;
 import com.codehive.exceptions.UserAlreadyExistsException;
-import com.codehive.repository.ports.UserRepository;
+import com.codehive.repository.SessionRepository;
+import com.codehive.repository.UserRepository;
 import com.codehive.services.AuthService;
+import com.codehive.services.SessionService;
 import com.codehive.services.ShaHashing;
 import com.codehive.utils.HashingService;
 import jakarta.servlet.ServletException;
@@ -34,10 +36,13 @@ public class RegisterController extends HttpServlet {
         }
 
         UserRepository userRepo = new UserRepository();
+        HashingService hashingService = new ShaHashing();
+        SessionRepository sessionRepo = new SessionRepository();
+        SessionService sessionService = new SessionService(sessionRepo);
+        
         User user = User.builder().username(username).password(password).email(email).build();
 
-        HashingService hashingService = new ShaHashing();
-        AuthService authService = new AuthService(userRepo, hashingService);
+        AuthService authService = new AuthService(userRepo, hashingService, sessionService);
 
         try {
             authService.registerUser(user);

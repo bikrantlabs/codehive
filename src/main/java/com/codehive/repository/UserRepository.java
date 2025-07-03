@@ -1,7 +1,8 @@
-package com.codehive.repository.ports;
+package com.codehive.repository;
 
 import com.codehive.db.DBConnection;
 import com.codehive.domain.entity.User;
+import com.codehive.repository.ports.UserRepoInterface;
 
 import java.sql.*;
 
@@ -37,7 +38,6 @@ public class UserRepository implements UserRepoInterface {
                 }
             }
         }
-
     }
 
     @Override

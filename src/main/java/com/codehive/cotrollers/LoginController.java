@@ -2,9 +2,12 @@ package com.codehive.cotrollers;
 
 import com.codehive.domain.entity.User;
 import com.codehive.exceptions.LoginException;
-import com.codehive.repository.ports.UserRepository;
+import com.codehive.repository.SessionRepository;
+import com.codehive.repository.UserRepository;
 import com.codehive.services.AuthService;
+import com.codehive.services.SessionService;
 import com.codehive.services.ShaHashing;
+import com.codehive.utils.CookieUtils;
 import com.codehive.utils.HashingService;
 import com.codehive.utils.RequestUtil;
 import jakarta.servlet.ServletException;
@@ -34,13 +37,17 @@ public class LoginController extends HttpServlet {
         }
 
         UserRepository userRepo = new UserRepository();
+        SessionRepository sessionRepo = new SessionRepository();
+        HashingService hashingService = new ShaHashing();
+        SessionService sessionService = new SessionService(sessionRepo);
         User user = User.builder().password(password).email(email).build();
 
-        HashingService hashingService = new ShaHashing();
-        AuthService authService = new AuthService(userRepo, hashingService);
+        AuthService authService = new AuthService(userRepo, hashingService, sessionService);
         try {
-            authService.loginUser(user);
+            String sessionId = authService.loginUser(user);
+            CookieUtils.setCookie(response, "SESSION_ID", sessionId);
             response.sendRedirect("/");
+
         } catch (LoginException e) {
             System.err.println("Exception: " + e.getMessage());
             RequestUtil.redirectWithError(request, response, e.getMessage(), fields, "login.jsp");

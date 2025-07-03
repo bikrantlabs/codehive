@@ -20,4 +20,17 @@ create table snippets
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
+CREATE TABLE sessions
+(
+    id         INT PRIMARY KEY AUTO_INCREMENT,
+    session_id VARCHAR(255)                        NOT NULL UNIQUE,
+    user_id    INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    expires_at TIMESTAMP                           NOT NULL,
+    is_active  BOOLEAN   DEFAULT TRUE,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
+
 CREATE INDEX idx_user_email on users (email);
