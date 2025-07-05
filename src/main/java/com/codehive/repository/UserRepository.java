@@ -41,8 +41,13 @@ public class UserRepository implements UserRepoInterface {
     }
 
     @Override
-    public User getById(Integer id) {
-        return null;
+    public User getById(Integer id) throws SQLException {
+        String sql = "SELECT * FROM users WHERE id = ?";
+        PreparedStatement preparedStatement = db.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setInt(1, id);
+
+        ResultSet rows = preparedStatement.executeQuery();
+        return buildUserFromResultSet(rows);
     }
 
     @Override
@@ -52,6 +57,10 @@ public class UserRepository implements UserRepoInterface {
         preparedStatement.setString(1, email);
 
         ResultSet rows = preparedStatement.executeQuery();
+        return buildUserFromResultSet(rows);
+    }
+
+    private User buildUserFromResultSet(ResultSet rows) throws SQLException {
         if (rows.next()) {
             User user = new User();
             user.setId(rows.getInt("id"));
@@ -62,7 +71,19 @@ public class UserRepository implements UserRepoInterface {
             user.setUpdatedAt(rows.getTimestamp("updated_at").toLocalDateTime());
             return user;
         }
-
         return null;
+    }
+
+    private void closeResources(PreparedStatement preparedStatement, ResultSet resultSet) {
+        try {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (resultSet != null) {
+                resultSet.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

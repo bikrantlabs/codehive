@@ -5,7 +5,7 @@ import com.codehive.domain.entity.Session;
 import java.sql.SQLException;
 
 public interface SessionRepoInterface {
-    Session getSessionById(Integer id) throws SQLException;
+    Session getSessionById(String sessionId) throws SQLException;
 
     Session getSessionByUserId(Integer userId) throws SQLException;
 

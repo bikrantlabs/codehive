@@ -53,4 +53,9 @@ public class LoginController extends HttpServlet {
             RequestUtil.redirectWithError(request, response, e.getMessage(), fields, "login.jsp");
         }
     }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("LOGIN HIT");
+        request.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(request, response);
+    }
 }

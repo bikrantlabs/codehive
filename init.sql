@@ -4,10 +4,12 @@ USE codehive;
 
 create table users
 (
-    id       INT PRIMARY KEY AUTO_INCREMENT,
-    username varchar(50)  NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    email    VARCHAR(50) UNIQUE
+    id         INT PRIMARY KEY AUTO_INCREMENT,
+    username   varchar(50)                         NOT NULL,
+    password   VARCHAR(255)                        NOT NULL,
+    email      VARCHAR(50) UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 create table snippets
@@ -16,7 +18,8 @@ create table snippets
     user_id    INT,
     title      VARCHAR(255),
     content    TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 

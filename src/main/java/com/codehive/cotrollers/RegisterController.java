@@ -39,7 +39,7 @@ public class RegisterController extends HttpServlet {
         HashingService hashingService = new ShaHashing();
         SessionRepository sessionRepo = new SessionRepository();
         SessionService sessionService = new SessionService(sessionRepo);
-        
+
         User user = User.builder().username(username).password(password).email(email).build();
 
         AuthService authService = new AuthService(userRepo, hashingService, sessionService);
@@ -58,5 +58,10 @@ public class RegisterController extends HttpServlet {
         request.setAttribute("username", username);
         request.setAttribute("email", email);
         request.getRequestDispatcher("register.jsp").forward(request, response);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("REGISTER HIT");
+        request.getRequestDispatcher("/WEB-INF/views/auth/register.jsp").forward(request, response);
     }
 }

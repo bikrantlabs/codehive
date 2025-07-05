@@ -14,7 +14,23 @@ public class SessionRepository implements SessionRepoInterface {
     }
 
     @Override
-    public Session getSessionById(Integer id) throws SQLException {
+    public Session getSessionById(String id) throws SQLException {
+        String query = "SELECT * FROM sessions WHERE session_id = ?";
+        try (PreparedStatement ps = db.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Session session = new Session();
+                session.setId(rs.getInt("id"));
+                session.setSessionId(rs.getString("session_id"));
+                session.setUserId(rs.getInt("user_id"));
+                session.setExpiresAt(rs.getTimestamp("expires_at").toLocalDateTime());
+                session.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+                session.setActive(rs.getBoolean("is_active"));
+                return session;
+            }
+        }
         return null;
     }
 

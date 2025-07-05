@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: bjung
@@ -26,10 +27,19 @@
                     <a href="#" class="nav-link">Create</a>
                     <a href="#" class="nav-link">Community</a>
                 </nav>
-                <div class="header-actions">
-                    <a href="auth/login.jsp" class="btn btn-outline">Sign In</a>
-                    <a href="auth/register.jsp" class="btn btn-primary">Sign Up</a>
-                </div>
+                <c:if test="${user == null}">
+                    <div class="header-actions">
+                        <a href="auth/login" class="btn btn-outline">Sign In</a>
+                        <a href="auth/register" class="btn btn-primary">Sign Up</a>
+                    </div>
+                </c:if>
+                <c:if test="${user != null}">
+                    <div class="header-actions">
+                        <span>Hello, ${user.username}</span>
+                            <%--                        <a href="auth/logout" class="btn btn-primary">Logout</a>--%>
+                        <a href="auth/logout" class="btn btn-outline">Logout</a>
+                    </div>
+                </c:if>
             </div>
         </div>
     </header>

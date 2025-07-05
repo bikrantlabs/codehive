@@ -2,6 +2,7 @@ package com.codehive.services;
 
 import com.codehive.domain.entity.Session;
 import com.codehive.domain.entity.User;
+import com.codehive.exceptions.InvalidSessionException;
 import com.codehive.repository.ports.SessionRepoInterface;
 
 import java.security.SecureRandom;
@@ -14,6 +15,24 @@ public class SessionService {
 
     public SessionService(SessionRepoInterface sessionRepostiory) {
         this.sessionRepo = sessionRepostiory;
+    }
+
+    public Session validateSession(String sessionId) throws InvalidSessionException {
+        try {
+            if (sessionId == null) throw new InvalidSessionException();
+            Session s = sessionRepo.getSessionById(sessionId);
+            if (s == null) {
+                throw new InvalidSessionException();
+            }
+            // Session is either inactive or expired
+            if (s.isActive() && s.getExpiresAt().isAfter(LocalDateTime.now())) {
+                return s;
+            }
+            return null;
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            throw new InvalidSessionException();
+        }
     }
 
     Session createSession(User user) {
