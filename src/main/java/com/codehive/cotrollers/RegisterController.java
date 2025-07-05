@@ -46,7 +46,7 @@ public class RegisterController extends HttpServlet {
 
         try {
             authService.registerUser(user);
-            response.sendRedirect("login.jsp");
+            response.sendRedirect(request.getContextPath() + "/auth/login");
         } catch (UserAlreadyExistsException e) {
             System.err.println("Exception: " + e.getMessage());
             redirectWithError(request, response, "User already exists", username, email);
@@ -57,7 +57,7 @@ public class RegisterController extends HttpServlet {
         request.setAttribute("error", error);
         request.setAttribute("username", username);
         request.setAttribute("email", email);
-        request.getRequestDispatcher("register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/auth/register.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

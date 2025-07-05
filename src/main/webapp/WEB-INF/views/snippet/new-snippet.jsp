@@ -13,9 +13,6 @@
 </head>
 <body>
 <div class="new-snippet-container">
-    <!-- Header -->
-
-
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
@@ -25,7 +22,8 @@
             </div>
 
             <div class="snippet-form-container">
-                <form class="snippet-form" id="snippetForm">
+                <form class="snippet-form" id="snippetForm" action="${pageContext.request.contextPath}/snippet/new"
+                      method="post">
                     <!-- Basic Information -->
                     <div class="form-section">
                         <div class="form-group">
@@ -73,28 +71,6 @@
 
                     <!-- Code Input -->
                     <div class="form-section">
-                        <h3 class="section-title">Code</h3>
-
-                        <div class="code-input-tabs">
-                            <button type="button" class="tab-button active" data-tab="paste">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                     stroke-width="2">
-                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-                                </svg>
-                                Paste Code
-                            </button>
-                            <button type="button" class="tab-button" data-tab="upload">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                     stroke-width="2">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                    <polyline points="7,10 12,15 17,10"></polyline>
-                                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                                </svg>
-                                Upload File
-                            </button>
-                        </div>
-
                         <div class="tab-content">
                             <!-- Paste Code Tab -->
                             <div class="tab-panel active" id="paste-panel">
@@ -102,7 +78,7 @@
                                     <label for="code" class="form-label">Code *</label>
                                     <textarea
                                             id="code"
-                                            name="code"
+                                            name="content"
                                             class="form-textarea code-textarea"
                                             placeholder="Paste your code here..."
                                             rows="15"
@@ -112,40 +88,6 @@
                             </div>
 
                             <!-- Upload File Tab -->
-                            <div class="tab-panel" id="upload-panel">
-                                <div class="file-upload-area" id="fileUploadArea">
-                                    <input type="file" id="fileInput" name="file"
-                                           accept=".js,.py,.java,.cpp,.c,.cs,.php,.rb,.go,.rs,.ts,.html,.css,.scss,.sql,.sh,.ps1,.json,.xml,.yml,.yaml,.md,.txt"
-                                           hidden>
-                                    <div class="upload-content">
-                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
-                                             stroke="currentColor" stroke-width="1.5" class="upload-icon">
-                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                                            <polyline points="7,10 12,15 17,10"/>
-                                            <line x1="12" y1="15" x2="12" y2="3"/>
-                                        </svg>
-                                        <h4 class="upload-title">Drop your file here</h4>
-                                        <p class="upload-description">or
-                                            <button type="button" class="upload-button">browse files</button>
-                                        </p>
-                                        <p class="upload-hint">Supports: .js, .py, .java, .cpp, .html, .css and more</p>
-                                    </div>
-                                    <div class="file-info" id="fileInfo" style="display: none;">
-                                        <div class="file-details">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                                 stroke="currentColor" stroke-width="2">
-                                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
-                                            </svg>
-                                            <div class="file-text">
-                                                <span class="file-name" id="fileName"></span>
-                                                <span class="file-size" id="fileSize"></span>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn btn-ghost btn-sm" id="removeFile">Remove
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
 

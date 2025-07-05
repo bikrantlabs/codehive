@@ -1,10 +1,14 @@
 package com.codehive.cotrollers.filters;
 
 import com.codehive.domain.entity.Session;
+import com.codehive.domain.entity.User;
 import com.codehive.exceptions.InvalidSessionException;
 import com.codehive.repository.SessionRepository;
+import com.codehive.repository.UserRepository;
 import com.codehive.repository.ports.SessionRepoInterface;
+import com.codehive.repository.ports.UserRepoInterface;
 import com.codehive.services.SessionService;
+import com.codehive.services.UserService;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.Cookie;
@@ -13,13 +17,16 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/dashboard", "/profile"})
+@WebFilter(urlPatterns = {"/dashboard", "/profile", "/snippet/new"})
 public class AuthFilter implements Filter {
 
     private SessionService sessionService;
+    private UserService userService;
 
     @Override
     public void init(FilterConfig filterConfig) {
+        UserRepoInterface userRepository = new UserRepository();
+        this.userService = new UserService(userRepository);
         SessionRepoInterface sessionRepo = new SessionRepository();
         this.sessionService = new SessionService(sessionRepo);
     }
@@ -35,11 +42,20 @@ public class AuthFilter implements Filter {
 
         String sessionId = extractSessionId(req);
 
-        if (sessionId == null || !isValidSession(sessionId)) {
-            redirectToLogin(res);
+        Session session = isValidSession(sessionId);
+        if (sessionId == null || session == null) {
+            redirectToLogin(req, res);
             return;
         }
+// Session is valid till here
+        User user = userService.getUserById(session.getUserId());
 
+        if (user == null) {
+            redirectToLogin(req, res);
+            return;
+        }
+        req.setAttribute("user", user);
+        
         chain.doFilter(servletRequest, servletResponse);
     }
 
@@ -55,17 +71,17 @@ public class AuthFilter implements Filter {
         return null;
     }
 
-    private boolean isValidSession(String sessionId) {
+    private Session isValidSession(String sessionId) {
 
         try {
-            Session s = sessionService.validateSession(sessionId);
-            return s != null && s.getUserId() != null;
+            return sessionService.validateSession(sessionId);
+
         } catch (InvalidSessionException e) {
-            return false;
+            return null;
         }
     }
 
-    private void redirectToLogin(HttpServletResponse response) throws IOException {
-        response.sendRedirect("/auth/login.jsp");
+    private void redirectToLogin(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        res.sendRedirect(req.getContextPath() + "/auth/login");
     }
 }

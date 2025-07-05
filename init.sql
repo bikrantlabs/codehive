@@ -18,6 +18,8 @@ create table snippets
     user_id    INT,
     title      VARCHAR(255),
     content    TEXT,
+    language   VARCHAR(50)                         NOT NULL,
+    is_public  BOOLEAN   DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE

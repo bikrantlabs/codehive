@@ -81,7 +81,7 @@
         <div class="register-footer">
             <p class="signin-text">
                 Already have an account?
-                <a href="login.jsp" class="signin-link">Sign in</a>
+                <a href="${pageContext.request.contextPath}/auth/login" class="signin-link">Sign in</a>
             </p>
         </div>
     </div>

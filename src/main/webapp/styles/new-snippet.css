@@ -73,15 +73,9 @@
 /* Form Sections */
 .form-section {
     margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--border-color);
 }
 
-.form-section:last-of-type {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
+
 
 .section-title {
     font-size: 1.25rem;
@@ -103,38 +97,6 @@
     margin-bottom: 1rem;
 }
 
-.tab-button {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1rem;
-    background: none;
-    border: none;
-    color: var(--muted-foreground-color);
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s ease-in-out;
-}
-
-.tab-button:hover {
-    color: var(--foreground-color);
-    background-color: var(--muted-color);
-}
-
-.tab-button.active {
-    color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
-}
-
-.tab-panel {
-    display: none;
-}
-
-.tab-panel.active {
-    display: block;
-}
 
 /* Code Textarea */
 .code-textarea {

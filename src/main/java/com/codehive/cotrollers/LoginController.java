@@ -32,7 +32,7 @@ public class LoginController extends HttpServlet {
         );
 
         if (email.isEmpty() || password.isEmpty()) {
-            RequestUtil.redirectWithError(request, response, "Invalid fields", fields, "login.jsp");
+            RequestUtil.redirectWithError(request, response, "Invalid fields", fields, "/WEB-INF/views/auth/login.jsp");
             return;
         }
 
@@ -50,7 +50,7 @@ public class LoginController extends HttpServlet {
 
         } catch (LoginException e) {
             System.err.println("Exception: " + e.getMessage());
-            RequestUtil.redirectWithError(request, response, e.getMessage(), fields, "login.jsp");
+            RequestUtil.redirectWithError(request, response, e.getMessage(), fields, "/WEB-INF/views/auth/login.jsp");
         }
     }
 
