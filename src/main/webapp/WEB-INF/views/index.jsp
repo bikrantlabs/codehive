@@ -36,8 +36,7 @@
                 <c:if test="${user != null}">
                     <div class="header-actions">
                         <span>Hello, ${user.username}</span>
-                            <%--                        <a href="auth/logout" class="btn btn-primary">Logout</a>--%>
-                        <a href="auth/logout" class="btn btn-outline">Logout</a>
+                        <a href="snippet/new" class="btn btn-outline">Create</a>
                     </div>
                 </c:if>
             </div>

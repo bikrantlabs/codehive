@@ -9,7 +9,7 @@
 <html>
 <head>
     <%@include file="../common/header.jsp" %>
-    <link rel="stylesheet" href="../styles/register.css"/>
+    <link rel="stylesheet" href="../../../styles/register.css"/>
 </head>
 <body>
 <div class="register-container">

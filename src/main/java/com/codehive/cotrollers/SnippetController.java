@@ -8,10 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/snippet/*")
+@WebServlet("/snippet/new")
 public class SnippetController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("SNIPPET HIT");
-        response.sendRedirect("/auth/register.jsp");
+        request.getRequestDispatcher("/WEB-INF/views/snippet/new-snippet.jsp").forward(request, response);
     }
 }

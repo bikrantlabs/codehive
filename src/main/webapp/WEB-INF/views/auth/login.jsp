@@ -9,7 +9,7 @@
 <html>
 <head>
     <%@include file="../common/header.jsp" %>
-    <link rel="stylesheet" href="../styles/login.css"/>
+    <link rel="stylesheet" href="../../../styles/login.css"/>
 </head>
 <body>
 <div class="login-container">

@@ -8,3 +8,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <title>Code Sharing Platform</title>
 <link rel="stylesheet" href="../../../styles/common.css"/>
+<link rel="stylesheet" href="../../../styles/button.css"/>
