@@ -54,7 +54,7 @@
                     and help others learn from your expertise.
                 </p>
                 <div class="hero-actions">
-                    <a href="auth/register.jsp" class="btn btn-primary btn-large">Get Started</a>
+                    <a href="auth/register" class="btn btn-primary btn-large">Get Started</a>
                     <a href="#" class="btn btn-outline btn-large">Browse Snippets</a>
                 </div>
                 <div class="hero-stats">
@@ -232,7 +232,7 @@
                 <h2 class="cta-title">Ready to Start Sharing?</h2>
                 <p class="cta-description">Join thousands of developers who are already sharing their knowledge</p>
                 <div class="cta-actions">
-                    <a href="register.html" class="btn btn-primary btn-large">Create Account</a>
+                    <a href="auth/register" class="btn btn-primary btn-large">Create Account</a>
                     <a href="#" class="btn btn-outline btn-large">Learn More</a>
                 </div>
             </div>

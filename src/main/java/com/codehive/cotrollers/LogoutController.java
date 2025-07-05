@@ -15,7 +15,6 @@ public class LogoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Invalidate the session to log out the user
-        System.out.println("LOGOUT HIT");
         //  Delete session cookie
         CookieUtils.deleteCookie(response, "SESSION_ID");
         // Redirect to the login page or home page after logout
