@@ -74,16 +74,5 @@ public class UserRepository implements UserRepoInterface {
         return null;
     }
 
-    private void closeResources(PreparedStatement preparedStatement, ResultSet resultSet) {
-        try {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-            if (resultSet != null) {
-                resultSet.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+
 }

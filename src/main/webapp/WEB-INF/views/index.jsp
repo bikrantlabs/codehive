@@ -10,39 +10,15 @@
 <html>
 <head>
     <%@include file="common/header.jsp" %>
-    <link rel="stylesheet" href="styles/home.css"/>
+    <link rel="stylesheet" href="../../styles/home.css"/>
+
+    <link rel="stylesheet" href="../../styles/navbar.css"/>
 </head>
 <body>
 <div class="home-container">
     <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <h2>CodeShare</h2>
-                </div>
-                <nav class="nav">
-                    <a href="#" class="nav-link active">Home</a>
-                    <a href="#" class="nav-link">Browse</a>
-                    <a href="#" class="nav-link">Create</a>
-                    <a href="#" class="nav-link">Community</a>
-                </nav>
-                <c:if test="${user == null}">
-                    <div class="header-actions">
-                        <a href="auth/login" class="btn btn-outline">Sign In</a>
-                        <a href="auth/register" class="btn btn-primary">Sign Up</a>
-                    </div>
-                </c:if>
-                <c:if test="${user != null}">
-                    <div class="header-actions">
-                        <span>Hello, ${user.username}</span>
-                        <a href="snippet/new" class="btn btn-outline">Create</a>
-                    </div>
-                </c:if>
-            </div>
-        </div>
-    </header>
 
+    <%@include file="common/navbar.jsp" %>
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
@@ -53,8 +29,13 @@
                     and help others learn from your expertise.
                 </p>
                 <div class="hero-actions">
-                    <a href="auth/register" class="btn btn-primary btn-large">Get Started</a>
-                    <a href="#" class="btn btn-outline btn-large">Browse Snippets</a>
+                    <c:if test="${user == null}">
+                        <a href="auth/register" class="btn btn-primary btn-large">Get Started</a>
+                    </c:if>
+                    <c:if test="${user != null}">
+                        <a href="snippets/create" class="btn btn-primary btn-large">View my Snippets</a>
+                    </c:if>
+                    <a href="snippets" class="btn btn-outline btn-large">Browse Snippets</a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat">

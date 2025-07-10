@@ -11,4 +11,8 @@ public interface SnippetRepoInterface {
     Snippet getById(Integer id) throws SQLException;
 
     List<Snippet> getAll(int start, int amount) throws SQLException;
+
+    List<Snippet> getAllByUserId(int userId, int start, int amount) throws SQLException;
+
+    List<Snippet> getAllPublic(int start, int amount) throws SQLException;
 }

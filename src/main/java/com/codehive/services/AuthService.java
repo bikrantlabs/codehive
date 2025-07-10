@@ -51,7 +51,7 @@ public class AuthService {
             System.out.println("Login successful");
             return session.getSessionId();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error during login: " + e.getMessage());
             throw new LoginException();
         }
     }

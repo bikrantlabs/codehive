@@ -3,8 +3,10 @@ package com.codehive.repository;
 import com.codehive.db.DBConnection;
 import com.codehive.domain.entity.Snippet;
 import com.codehive.repository.ports.SnippetRepoInterface;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SnippetRepository implements SnippetRepoInterface {
@@ -18,6 +20,7 @@ public class SnippetRepository implements SnippetRepoInterface {
     @Override
     public Snippet create(Snippet snippet) throws SQLException {
         String sql = "INSERT INTO snippets (title, content, language, user_id, is_public) VALUES (?, ?, ?, ?, ?)";
+
         try (PreparedStatement preparedStatement = db.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, snippet.getTitle());
             preparedStatement.setString(2, snippet.getContent());
@@ -35,8 +38,11 @@ public class SnippetRepository implements SnippetRepoInterface {
                 if (resultSet.next()) {
                     int newId = resultSet.getInt(1);
                     snippet.setId(newId);
+
+
                     return snippet;
                 } else {
+
                     throw new SQLException("Inserting snippet failed, no ID obtained.");
                 }
             }
@@ -50,6 +56,50 @@ public class SnippetRepository implements SnippetRepoInterface {
 
     @Override
     public List<Snippet> getAll(int start, int amount) throws SQLException {
+        String query = "SELECT * FROM snippets LIMIT ? OFFSET ?";
+        return getSnippets(start, amount, query);
+    }
+
+    @Override
+    public List<Snippet> getAllByUserId(int userId, int start, int amount) throws SQLException {
         return List.of();
+    }
+
+    @Override
+    public List<Snippet> getAllPublic(int start, int amount) throws SQLException {
+        String query = "SELECT * FROM snippets  WHERE is_public = true LIMIT ? OFFSET ?";
+        return getSnippets(start, amount, query);
+    }
+
+    @NotNull
+    private List<Snippet> getSnippets(int start, int amount, String query) throws SQLException {
+        try (PreparedStatement preparedStatement = db.prepareStatement(query)) {
+            preparedStatement.setInt(1, amount);
+            preparedStatement.setInt(2, start);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return buildSnippetListFromResultSet(resultSet);
+        }
+    }
+
+    private List<Snippet> buildSnippetListFromResultSet(ResultSet resultSet) throws SQLException {
+        List<Snippet> snippets = new ArrayList<>();
+        while (resultSet.next()) {
+            snippets.add(buildSnippetFromResultSet(resultSet));
+        }
+        return snippets;
+    }
+
+    private Snippet buildSnippetFromResultSet(ResultSet resultSet) throws SQLException {
+        Snippet snippet = new Snippet();
+        snippet.setId(resultSet.getInt("id"));
+        snippet.setTitle(resultSet.getString("title"));
+        snippet.setContent(resultSet.getString("content"));
+        snippet.setLanguage(resultSet.getString("language"));
+        snippet.setUserId(resultSet.getInt("user_id"));
+        snippet.setPublic(resultSet.getBoolean("is_public"));
+        snippet.setCreatedAt(resultSet.getTimestamp("created_at").toLocalDateTime());
+        snippet.setUpdatedAt(resultSet.getTimestamp("updated_at").toLocalDateTime());
+        return snippet;
     }
 }

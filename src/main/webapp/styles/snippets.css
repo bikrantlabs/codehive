@@ -1,0 +1,328 @@
+.snippets-container {
+    min-height: 100vh;
+    background-color: var(--background-color);
+}
+
+/* Main Content */
+.main-content {
+    padding: 1.5rem 0;
+}
+
+/* Filters Section */
+.filters-section {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filters-container {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1rem;
+}
+
+.filters-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-select {
+    min-width: 160px;
+    flex: 1;
+    max-width: 200px;
+}
+
+.visibility-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    color: var(--foreground-color);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.visibility-toggle:hover {
+    background-color: var(--accent-color);
+    border-color: var(--primary-color);
+}
+
+.visibility-toggle.active {
+    background-color: var(--primary-color);
+    color: var(--primary-foreground-color);
+    border-color: var(--primary-color);
+}
+
+.toggle-text {
+    white-space: nowrap;
+}
+
+/* Snippets Grid */
+.snippets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+/* Snippet Cards - Modern Design */
+.snippet-card {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    position: relative;
+}
+
+.snippet-card:hover {
+    border-color: var(--primary-color);
+    background-color: var(--muted-color);
+}
+
+.snippet-card:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), var(--ring-color));
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+
+/* Snippet Header */
+.snippet-header {
+    margin-bottom: 1rem;
+}
+
+.snippet-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.language-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 20px;
+    font-size: 0.625rem;
+    font-weight: 700;
+    border-radius: calc(var(--radius) * 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-javascript {
+    background-color: #f7df1e;
+    color: #000;
+}
+
+.badge-python {
+    background-color: #3776ab;
+    color: #fff;
+}
+
+.badge-java {
+    background-color: #ed8b00;
+    color: #fff;
+}
+
+.badge-css {
+    background-color: #1572b6;
+    color: #fff;
+}
+
+.badge-html {
+    background-color: #e34f26;
+    color: #fff;
+}
+
+.badge-sql {
+    background-color: #336791;
+    color: #fff;
+}
+
+.snippet-visibility {
+    color: var(--muted-foreground-color);
+}
+
+.snippet-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--foreground-color);
+    margin: 0;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Snippet Content */
+.snippet-content {
+    margin-bottom: 1rem;
+}
+
+/*.code-preview {*/
+/*    background-color: var(--muted-color);*/
+/*    border-radius: calc(var(--radius) * 0.75);*/
+/*    padding: 0.875rem;*/
+/*    position: relative;*/
+/*    overflow: hidden;*/
+/*}*/
+
+.code-preview pre {
+    margin: 0;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--foreground-color);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden !important;
+}
+
+.code-preview code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    font-size: 0.75rem !important;
+}
+
+.code-preview::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(transparent, var(--muted-color));
+    pointer-events: none;
+}
+
+/* Snippet Footer */
+.snippet-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.snippet-author {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.author-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--ring-color));
+    flex-shrink: 0;
+}
+
+.author-name {
+    font-size: 0.75rem;
+    color: var(--muted-foreground-color);
+    font-weight: 500;
+}
+
+.snippet-stats {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--muted-foreground-color);
+    font-weight: 500;
+}
+
+.stat-item svg {
+    opacity: 0.7;
+}
+
+/* Load More Section */
+.load-more-section {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .snippets-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+    }
+
+    .filters-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .filter-select {
+        min-width: auto;
+        max-width: none;
+    }
+
+    .visibility-toggle {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 1rem 0;
+    }
+
+    .snippets-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .snippet-card {
+        padding: 1rem;
+    }
+
+    .code-preview pre {
+        font-size: 0.7rem;
+        -webkit-line-clamp: 3;
+    }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .snippet-card:hover {
+    background-color: var(--muted-color);
+}
+
+[data-theme="dark"] .code-preview::after {
+    background: linear-gradient(transparent, var(--muted-color));
+}
+
+[data-theme="dark"] .visibility-toggle {
+    background-color: var(--secondary-color);
+}
+
+[data-theme="dark"] .visibility-toggle:hover {
+    background-color: var(--accent-color);
+}
