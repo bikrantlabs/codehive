@@ -5,3 +5,5 @@
 [ ] Snippet Browse Page `/snippets`
 
 [ ] Search Snippets
+
+[ ] User's snippet page

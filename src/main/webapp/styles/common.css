@@ -208,6 +208,41 @@ a {
     transition: color 0.2s ease-in-out;
 }
 
+pre{
+    font-family: "Arial"  !important;
+}
+
+.badge-javascript {
+    background-color: #f7df1e;
+    color: #000;
+}
+
+.badge-python {
+    background-color: #3776ab;
+    color: #fff;
+}
+
+.badge-java {
+    background-color: #ed8b00;
+    color: #fff;
+}
+
+.badge-css {
+    background-color: #1572b6;
+    color: #fff;
+}
+
+.badge-html {
+    background-color: #e34f26;
+    color: #fff;
+}
+
+.badge-sql {
+    background-color: #336791;
+    color: #fff;
+}
+
+
 a:hover {
     color: var(--ring-color);
     text-decoration: underline;

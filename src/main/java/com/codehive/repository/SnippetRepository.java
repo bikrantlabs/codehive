@@ -26,7 +26,7 @@ public class SnippetRepository implements SnippetRepoInterface {
             preparedStatement.setString(2, snippet.getContent());
             preparedStatement.setString(3, snippet.getLanguage());
             preparedStatement.setInt(4, snippet.getUserId());
-            preparedStatement.setBoolean(5, snippet.isPublic());
+            preparedStatement.setBoolean(5, snippet.isVisible());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -51,7 +51,16 @@ public class SnippetRepository implements SnippetRepoInterface {
 
     @Override
     public Snippet getById(Integer id) throws SQLException {
-        return null;
+        String sql = "SELECT * FROM snippets WHERE id = ?";
+        PreparedStatement preparedStatement = db.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setInt(1, id);
+
+        ResultSet rows = preparedStatement.executeQuery();
+        if (rows.next()) {
+            return buildSnippetFromResultSet(rows);
+        } else {
+            return null; // or throw exception if you prefer
+        }
     }
 
     @Override
@@ -97,7 +106,7 @@ public class SnippetRepository implements SnippetRepoInterface {
         snippet.setContent(resultSet.getString("content"));
         snippet.setLanguage(resultSet.getString("language"));
         snippet.setUserId(resultSet.getInt("user_id"));
-        snippet.setPublic(resultSet.getBoolean("is_public"));
+        snippet.setVisible(resultSet.getBoolean("is_public"));
         snippet.setCreatedAt(resultSet.getTimestamp("created_at").toLocalDateTime());
         snippet.setUpdatedAt(resultSet.getTimestamp("updated_at").toLocalDateTime());
         return snippet;

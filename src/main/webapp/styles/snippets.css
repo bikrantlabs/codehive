@@ -33,7 +33,31 @@
     flex: 1;
     max-width: 200px;
 }
+.code-actions {
+    display: flex;
+    gap: 0.5rem;
+}
 
+.code-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: calc(var(--radius) * 0.75);
+    color: var(--muted-foreground-color);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.code-action-btn:hover {
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+    border-color: var(--primary-color);
+}
 .visibility-toggle {
     display: flex;
     align-items: center;
@@ -88,17 +112,10 @@
     background-color: var(--muted-color);
 }
 
-.snippet-card:hover::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary-color), var(--ring-color));
-    border-radius: var(--radius) var(--radius) 0 0;
-}
 
+pre {
+    transform:translateY(-8px);
+}
 /* Snippet Header */
 .snippet-header {
     margin-bottom: 1rem;
@@ -124,35 +141,6 @@
     letter-spacing: 0.05em;
 }
 
-.badge-javascript {
-    background-color: #f7df1e;
-    color: #000;
-}
-
-.badge-python {
-    background-color: #3776ab;
-    color: #fff;
-}
-
-.badge-java {
-    background-color: #ed8b00;
-    color: #fff;
-}
-
-.badge-css {
-    background-color: #1572b6;
-    color: #fff;
-}
-
-.badge-html {
-    background-color: #e34f26;
-    color: #fff;
-}
-
-.badge-sql {
-    background-color: #336791;
-    color: #fff;
-}
 
 .snippet-visibility {
     color: var(--muted-foreground-color);
@@ -174,14 +162,10 @@
 .snippet-content {
     margin-bottom: 1rem;
 }
+div.code-toolbar > .toolbar {
+    display:none !important;
+}
 
-/*.code-preview {*/
-/*    background-color: var(--muted-color);*/
-/*    border-radius: calc(var(--radius) * 0.75);*/
-/*    padding: 0.875rem;*/
-/*    position: relative;*/
-/*    overflow: hidden;*/
-/*}*/
 
 .code-preview pre {
     margin: 0;

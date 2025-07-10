@@ -9,3 +9,6 @@
 <title>Code Sharing Platform</title>
 <link rel="stylesheet" href="../../../styles/common.css"/>
 <link rel="stylesheet" href="../../../styles/button.css"/>
+<link href="../../../styles/prism.css" rel="stylesheet"/>
+<script src="../../../styles/prism.js"></script>
+<script src="../../../styles/script.js"></script>

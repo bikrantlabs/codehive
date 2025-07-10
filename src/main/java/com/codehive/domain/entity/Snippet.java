@@ -14,5 +14,5 @@ public class Snippet extends Entity {
     private String content;
     private String language;
     private Integer userId; // Foreign key to User entity
-    private boolean isPublic; // Indicates if the snippet is public or private
+    private boolean visible; // Indicates if the snippet is public or private
 }

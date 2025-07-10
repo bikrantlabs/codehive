@@ -1,5 +1,6 @@
 package com.codehive.cotrollers;
 
+import com.codehive.utils.Routes;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,6 +13,6 @@ import java.io.IOException;
 public class DashboardController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("DASHBOARD HIT");
-        request.getRequestDispatcher("/WEB-INF/views/dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher(Routes.DASHBOARD.getPath()).forward(request, response);
     }
 }

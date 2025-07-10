@@ -17,6 +17,10 @@ public class SnippetService {
         return snippetRepo.create(snippet);
     }
 
+    public Snippet getById(Integer id) throws SQLException {
+        return snippetRepo.getById(id);
+    }
+
     public List<Snippet> getAllPublic(int start, int amount) throws SQLException {
         return snippetRepo.getAllPublic(start, amount);
     }

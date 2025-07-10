@@ -4,6 +4,7 @@ import com.codehive.domain.entity.Snippet;
 import com.codehive.repository.SnippetRepository;
 import com.codehive.repository.ports.SnippetRepoInterface;
 import com.codehive.services.SnippetService;
+import com.codehive.utils.Routes;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,7 +32,7 @@ public class SnippetListController extends HttpServlet {
                 System.out.println("Snippet ID: " + snippet.getId() + ", Title: " + snippet.getTitle() + ", Language: " + snippet.getLanguage());
             }
             request.getSession().setAttribute("snippets", snippets);
-            request.getRequestDispatcher("/WEB-INF/views/snippet/snippets.jsp").forward(request, response);
+            request.getRequestDispatcher(Routes.SNIPPETS.getPath()).forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

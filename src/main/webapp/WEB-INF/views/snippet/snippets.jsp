@@ -57,21 +57,22 @@
                         <div class="snippet-header">
                             <div class="snippet-meta">
                                 <span class="language-badge badge-${snippet.language}">${snippet.language}</span>
-                                <div class="snippet-visibility">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                         stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <path d="M2 12h20"></path>
-                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                                    </svg>
+                                <div class="code-actions">
+                                    <button class="code-action-btn" onclick="copyCode('${snippet.id}')">Copy</button>
+                                    <button class="code-action-btn" onclick="downloadCode('${snippet.id}')">Download
+                                    </button>
                                 </div>
                             </div>
-                            <h3 class="snippet-title">${snippet.title}</h3>
+                            <a href="${pageContext.request.contextPath}/snippet/${snippet.id}">
+                                <h3 class="snippet-title">${snippet.title}</h3>
+                            </a>
                         </div>
 
                         <div class="snippet-content">
                             <div class="code-preview">
-                                <pre><code class="language-${snippet.language}">${snippet.content}</code></pre>
+                                <pre data-download-link="${snippet.title}" data-id="${snippet.id}"><code
+                                        class="language-${snippet.language}"
+                                        data-id="${snippet.id}">${snippet.content}</code></pre>
                             </div>
                         </div>
 
@@ -89,7 +90,7 @@
                         </div>
                     </article>
                 </c:forEach>
-                >
+
             </div>
 
             <!-- Load More -->

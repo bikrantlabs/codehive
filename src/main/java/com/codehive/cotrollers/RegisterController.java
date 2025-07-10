@@ -9,6 +9,7 @@ import com.codehive.services.AuthService;
 import com.codehive.services.SessionService;
 import com.codehive.services.ShaHashing;
 import com.codehive.utils.HashingService;
+import com.codehive.utils.Routes;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -57,10 +58,10 @@ public class RegisterController extends HttpServlet {
         request.setAttribute("error", error);
         request.setAttribute("username", username);
         request.setAttribute("email", email);
-        request.getRequestDispatcher("/WEB-INF/views/auth/register.jsp").forward(request, response);
+        request.getRequestDispatcher(Routes.REGISTER.getPath()).forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/auth/register.jsp").forward(request, response);
+        request.getRequestDispatcher(Routes.REGISTER.getPath()).forward(request, response);
     }
 }

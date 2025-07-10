@@ -10,6 +10,7 @@ import com.codehive.services.ShaHashing;
 import com.codehive.utils.CookieUtils;
 import com.codehive.utils.HashingService;
 import com.codehive.utils.RequestUtil;
+import com.codehive.utils.Routes;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -32,7 +33,7 @@ public class LoginController extends HttpServlet {
         );
 
         if (email.isEmpty() || password.isEmpty()) {
-            RequestUtil.redirectWithError(request, response, "Invalid fields", fields, "/WEB-INF/views/auth/login.jsp");
+            RequestUtil.redirectWithError(request, response, "Invalid fields", fields, Routes.LOGIN.getPath());
             return;
         }
 
@@ -50,11 +51,11 @@ public class LoginController extends HttpServlet {
 
         } catch (LoginException e) {
             System.err.println("Exception: " + e.getMessage());
-            RequestUtil.redirectWithError(request, response, e.getMessage(), fields, "/WEB-INF/views/auth/login.jsp");
+            RequestUtil.redirectWithError(request, response, e.getMessage(), fields, Routes.LOGIN.getPath());
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(request, response);
+        request.getRequestDispatcher(Routes.LOGIN.getPath()).forward(request, response);
     }
 }
